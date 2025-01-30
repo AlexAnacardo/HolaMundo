@@ -69,7 +69,27 @@ public class servlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        // Configurar el tipo de respuesta en HTML y el juego de caracteres
+        response.setContentType("text/html;charset=UTF-8");
+
+        // Obtener el valor del parámetro 'nombre' enviado desde el formulario
+        String nombre = request.getParameter("nombre");
+
+        // Generar la respuesta HTML
+        try (PrintWriter out = response.getWriter()) {
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Bienvenido</title>");
+            out.println("<meta charset='UTF-8'>");
+            out.println("<meta name='viewport' content='width=device-width, initial-scale=1.0'>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>¡Bienvenido, " + nombre + "!</h1>");
+            out.println("<a href='index.html'>Volver al inicio</a>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     }
 
     /**
@@ -79,7 +99,7 @@ public class servlet extends HttpServlet {
      */
     @Override
     public String getServletInfo() {
-        return "Short description";
+        return "Servlet que muestra un mensaje de bienvenida basado en el nombre proporcionado.";
     }// </editor-fold>
 
 }
